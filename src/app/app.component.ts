@@ -2,6 +2,7 @@
 import 'rxjs/Rx';
 import { SignalsApiService } from './services/signals.service';
 import 'rxjs/add/operator/toPromise';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,23 @@ import 'rxjs/add/operator/toPromise';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+    title = 'app';
+    content: any;
   signal = {
       user: '',
-      content: ''
+      content: this.content
   };
  
 
-  constructor(private signalsApiService: SignalsApiService, ) {
-      this.getContent();
+  constructor(private signalsApiService: SignalsApiService, private _sanitizer: DomSanitizer) {
+      this.getContent();      
   }
 
+
+  checkContent() {      
+      var yourstring = 'and';
+      this.signal.content = this._sanitizer.bypassSecurityTrustHtml('<strong>testing</strong> <span class=red>oks</span>');//this.signal.content.replace(yourstring, '<span style="color:Red"><strong>' + yourstring + '</strong></span>');
+  }
 
   saveContent() {
             
@@ -33,10 +40,11 @@ export class AppComponent {
 
   }
 
-  getContent() {
+  getContent() {     
       this.signalsApiService.get(this.signal.user).subscribe((res) => {
           console.log('user:', res);
           this.signal = res;
+          this.signal.content = '<strong>testing</strong> <span class=red>ok</span>';
       }, (err) => {
           console.log('err:', err.statusCode, err.message.detail);
       });
