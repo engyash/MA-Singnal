@@ -1,21 +1,43 @@
 ﻿/* You can add global styles to this file, and also import other style files */
+@import 'node_modules/angular2-toaster/toaster';
+
+body{
+  background-color:lightgray;
+}
+
+.signal-content {
+  width: 500px;
+  height: 200px;
+  margin: 0 auto;
+  background: #fff;
+  padding:10px;
+  border-radius:10px;
+}
+
+.content-editor{
+  height:100px;
+  border:1px solid;
+}
+
+.btn-wrapper{
+  margin-top:50px;
+  text-align:center;
+}
 
 .red {
-  color:red;
-  font-size:35px;
+  color: red;
 }
 
 .blue {
-  color: blue;
-  font-size: 60px;
+  color: blue;  
 }
 
-.green {
+.bold-green {
   color:green;
   font-weight:bold;
 }
 
-.orange {
+.bold-orange {
   color: orange;
   font-weight: bold;
 }

@@ -1,12 +1,14 @@
-﻿
-<div class="col-md-12">  
-  <div contenteditable="true"          
-      [innerHTML]="signal.content"              
-     (keyup)="checkContent()"
-     (input)="signal.content=$event.target.innerHTML"></div>  
-</div>
-{{signal.content}}
-<div class="col-md-12">
-<input type="button" value="Save" (click)="saveContent()" class="btn btn-default" />
+﻿<toaster-container></toaster-container>
+<div class="col-md-12 signal-content">
+  <div class="col-md-12">
+    <div contenteditable="true"
+         [innerHTML]="signal.content"
+         (keyup)="checkContent()"
+         (input)="signal.content=$event.target.innerHTML"
+         class="content-editor"></div>
 
+  </div>
+  <div class="col-md-12 btn-wrapper">
+    <input type="button" value="Save" (click)="saveContent()" class="btn btn-default" />
+  </div>
 </div>
