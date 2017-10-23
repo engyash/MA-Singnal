@@ -26,10 +26,15 @@ export class AppComponent {
   }
 
 
-  checkContent() {      
+  checkContent($event) {
+      console.log($event.target.innerHTML);
+      this.signal.content = $event.target.innerHTML;
+
       var mapObj = {
-          ' and': `<span class=blue>AND</span>`, ' or': `<span class=blue>OR</span>`,
-          'lower': `<strong>lower</strong>`, 'lower than': `<strong>lower than</strong>`, 'higher': `<strong>higher</strong>`, 'higher than': `<strong>higher than</strong>`,
+          ' and': `<span class=blue> AND</span>`, ' or': `<span class=blue> OR</span>`,
+          ' AND': `<span class=blue> AND</span>`, ' OR': `<span class=blue> OR</span>`,
+          'lower than': `<strong>lower than</strong>`, 'lower': `<strong>lower</strong>`,
+          'higher than': `<strong>higher than</strong>`, 'higher': `<strong>higher</strong>`,
           'exponential moving average': `<span class=bold-green>exponential moving average</span>`,
           'moving average': `<span class=bold-orange>moving average</span>`,
           'simple moving average': `<span class=bold-orange>simple moving average</span>`,
@@ -41,6 +46,9 @@ export class AppComponent {
       });
   }
 
+  onFocus($event) {
+      this.signal.content = $event.target.innerText;
+  }
   
   saveContent() {
             
