@@ -24,8 +24,22 @@ export class AppComponent {
 
 
   checkContent() {      
-      var yourstring = 'and';
-      this.signal.content = this._sanitizer.bypassSecurityTrustHtml('<strong>testing</strong> <span class=red>oks</span>');//this.signal.content.replace(yourstring, '<span style="color:Red"><strong>' + yourstring + '</strong></span>');
+
+      var mapObj = {
+          ' and': `<span class=blue>AND</span>`, ' or': `<span class=blue>OR</span>`,
+          'lower': `<strong>lower</strong>`, 'lower than': `<strong>lower than</strong>`, 'higher': `<strong>higher</strong>`, 'higher than': `<strong>higher than</strong>`,
+          'exponential moving average': `<span class=green>exponential moving average</span>`,
+          'moving average': `<span class=orange>moving average</span>`,
+          'simple moving average': `<span class=orange>simple moving average</span>`,
+      };
+
+      var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
+      this.signal.content = this.signal.content.replace(re, function (matched) {          
+          return mapObj[matched] ? mapObj[matched] : '';
+      }); 
+
+
+      console.log(' this.signal.content', this.signal.content);
   }
 
   saveContent() {
@@ -44,7 +58,7 @@ export class AppComponent {
       this.signalsApiService.get(this.signal.user).subscribe((res) => {
           console.log('user:', res);
           this.signal = res;
-          this.signal.content = '<strong>testing</strong> <span class=red>ok</span>';
+          this.signal.content = 'testing<span class=red>ok</span>';
       }, (err) => {
           console.log('err:', err.statusCode, err.message.detail);
       });

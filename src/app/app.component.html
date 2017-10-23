@@ -1,11 +1,11 @@
 ﻿
 <div class="col-md-12">  
   <div contenteditable="true"          
-     [innerHTML]="signal.content"     
-     (input)="signal.content=$event.target.textContent"
-     (keypress)="checkContent()"></div>  
+      [innerHTML]="signal.content"              
+     (keyup)="checkContent()"
+     (input)="signal.content=$event.target.innerHTML"></div>  
 </div>
-
+{{signal.content}}
 <div class="col-md-12">
 <input type="button" value="Save" (click)="saveContent()" class="btn btn-default" />
 
